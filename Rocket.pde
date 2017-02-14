@@ -37,11 +37,11 @@ class Rocket {
       int y = (int)location.y / gridScale;
       x = constrain(x, 0, dna.genes.length - 1);
       y = constrain(y, 0, dna.genes[0].length - 1);
-      acceleration = dna.getPV(x, y);
+      acceleration = dna.genes[x][y];
       velocity.add(acceleration);
       velocity.limit(maxSpeed);
       location.add(velocity);
-      if (PVector.dist(location, target) < 2)
+      if (PVector.dist(location, target) < 20)
         finished = 0;
     }
   }
@@ -54,7 +54,10 @@ class Rocket {
 
   void fitness() {
     float dist = PVector.dist(location, target);
-    fitness = pow(1/dist, 2);
-    if (crushed) fitness *= 0.01;
+    if (finished != 100000)
+      dist = 1;
+    fitness = (1 / pow(finished, 1.5)) * (1 / (pow(dist, 6)));
+    if (crushed) 
+      fitness *= 0.1;
   }
 }
