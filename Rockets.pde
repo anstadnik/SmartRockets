@@ -66,14 +66,15 @@ class Rockets {
     float totalFitness = getTotalFitness();
     for (int i = 0; i < army.length; i++) {
       if (army[i].fitness > averageFitness) {//adding only the best half
-      float fitnessNormal = army[i].fitness / totalFitness;
-      int n = (int) (fitnessNormal * 50000);
-      //float n = map(army[i].fitness, 0, maxFitness, 0, 100);
-      for (int j = 0; j < n; j++)
-        matingPool.add(army[i]);
+        float fitnessNormal = army[i].fitness / totalFitness;
+        int n = (int) (fitnessNormal * 50000);
+        //float n = map(army[i].fitness, 0, maxFitness, 0, 100);
+        for (int j = 0; j < n; j++)
+          matingPool.add(army[i]);
       }
+      //println(army[i].fitness);
     }
-    println(matingPool.size());
+    //println(matingPool.size());
   }
 
   void generate(float mutationScale) {
@@ -91,13 +92,13 @@ class Rockets {
     return total;
   }
 
-  float getMaxFitness(){    
+  float getMaxFitness() {    
     float max = 0;    
     for (int i = 0; i < army.length; i++) 
-      if(army[i].fitness > max) max = army[i].fitness;
+      if (army[i].fitness > max) max = army[i].fitness;
     return max;
   }
-  
+
   float getAverageFitness() {
     float total = 0;    
     for (int i = 0; i < army.length; i++) 
@@ -107,7 +108,9 @@ class Rockets {
 
   void showInfo() { 
     textSize(15);
-    text("Rockets crushed: " + crushedCounter, 5, textCounter++ * 20);
-    text("Rockets arrived: " + best, 5, textCounter++ * 20);
+    noStroke();
+    fill(255);
+    text("Rockets crushed: " + crushedCounter, 5, textCounterLeft++ * 20);
+    text("Rockets arrived: " + best, 5, textCounterLeft++ * 20);
   }
 }

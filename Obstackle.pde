@@ -10,6 +10,8 @@ class Obstackle {
   }
 
   void display() {
+    fill(236,64,122);
+    noStroke();
     rect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
   }
 

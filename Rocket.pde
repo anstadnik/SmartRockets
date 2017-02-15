@@ -47,8 +47,22 @@ class Rocket {
   }
 
   void display() {
-    fill(255);
-    ellipse(location.x, location.y, 4, 4);
+    if (crushed) 
+      fill(94,53,177);
+    else if (finished != 100000)
+      fill(67,160,71);
+    else 
+      fill(255);
+    pushMatrix();
+    translate(location.x, location.y);
+    rotate(velocity.heading() - HALF_PI);
+    beginShape();
+    vertex(0, 9);
+    vertex(-4, -3);
+    vertex(4, -3);
+    endShape();
+    popMatrix();
+    //ellipse(location.x, location.y, 4, 4);
     noFill();
   }
 
